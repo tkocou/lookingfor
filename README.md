@@ -23,3 +23,8 @@ Let's say that you are in the base directory of a Python project and the source 
 lookingfor .py connect ./source  :This configuration will use '.py' as the file extension and search the contents of each targeted file for 'connect' in the './source' directory
 
 Absolute paths work just as well as relative paths. So you need to search in a directory completely different from the one which you are currently at, use the absolute path to the target directory.
+
+Another use for 'lookingfor' would be a situation where you are reading a source code file and it references a "function()" which is not in that file. You can tell 'lookingfor' which "function()" to search for in the same directory where you are at.
+
+Example:
+lookingfor '' readMessage( 
