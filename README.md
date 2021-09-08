@@ -10,13 +10,15 @@ lookingfor is a CLI script and needs to be ran in a terminal window. Copy 'looki
 
 Use examples:
 
-lookingfor '' base  :This configuration will use the default file extension of 'cpp' and search the contents of each targeted file for 'base' in the current directory
+            V----Two single quotes - back to back to indicate a blank option
+            V
+lookingfor '' base  :This configuration will search by known extensions and search the contents of each targeted file for 'base' in the current directory
 
 lookingfor .h   :This configuration will use '.h' as the file extension and search the contents of each targeted file for the default of 'def' in the current directory
 
 Let's say that you are in the base directory of a project and the source code files are held in the directory 'src'.
 
-lookingfor '' struct ./src  :This configuration will use the default file extension of 'cpp' and search the contents of each targeted file for 'struct' in the './src' directory
+lookingfor '' struct ./src  :This configuration will search by known extensions and search the contents of each targeted file for 'struct' in the './src' directory
 
 Let's say that you are in the base directory of a Python project and the source code scripts are stored in 'source'.
 

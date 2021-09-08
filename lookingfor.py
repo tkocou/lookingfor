@@ -14,9 +14,15 @@ def printHelp():
     quit()
 
 # Set up defaults
-fileType = "cpp"
+fileType = "any"
 searchText = "def"
 whereToStart = "."
+knownFileExt = ["c","cpp","cxx","h","py"]
+# add any other file extensions to be checked
+customFileExtension = []
+
+# Merge the two extension lists
+knownFileExt += customFileExtension
 
 # process any CLI arguments
 if len(sys.argv) == 1:
@@ -34,6 +40,8 @@ if len(sys.argv) > 1:
     for aArgv in argV:
         if index == 1:
             if len(aArgv) != 0:
+                # use default value if none were passed (two each - single quotes = blank)
+                # Otherwise assign the given extension
                 fileType = aArgv
             index += 1
             continue
@@ -46,23 +54,37 @@ if len(sys.argv) > 1:
             whereToStart = aArgv
             index += 1
 
-print("Looking for any file ending in '"+fileType+"' containing the text '"+searchText+"' in directory '"+whereToStart+"'\n")
+if fileType == "any":
+    print("Looking at files with known file extensions containing the text '"+searchText+"' in directory '"+whereToStart+"'\n")
+else:
+    print("Looking for any file ending in '"+fileType+"' containing the text '"+searchText+"' in directory '"+whereToStart+"'\n")
 
 tmpList = 'tmp_list.txt'
 os.chdir(whereToStart)
 searchDir = os.getcwd()
 searchFile = os.path.join(searchDir, tmpList)
 listedFiles = os.listdir(searchDir)
-
 # Get a list of source code files ending in the fileType
 with open(searchFile, 'w') as s:
     for fileLines in listedFiles:
-        # filter out any file not containing filetype
-        if re.search(fileType, fileLines) != None:
-            # Lets get more specific
+        # Lets get more specific
+        # For no specified extension, loop through known extensions
+        if fileType == "any":
+            for ext in knownFileExt:
+                searchPoint = len(fileLines) - len(ext)
+                    # Parse the extension
+                searchLine = fileLines[searchPoint:]
+                    # Does the file extension match a known extension
+                if searchLine == ext:
+                        # Yes, write it out
+                    s.write(fileLines +'\n')
+        else:  # We have a specified extension
             searchPoint = len(fileLines) - len(fileType)
+                # Parse the extension
             searchLine = fileLines[searchPoint:]
+                # Check the file extension against the specified ext.
             if searchLine == fileType:
+                # Yes, write it out
                 s.write(fileLines +'\n')
 
 # Open each file in the list and check if it has the desired text
