@@ -64,7 +64,7 @@ try:
     os.chdir(whereToStart)
 except FileNotFoundError:
     print("Directory not found! Check spelling.")
-    os.quit()
+    sys.exit()
 searchDir = os.getcwd()
 searchFile = os.path.join(searchDir, tmpList)
 listedFiles = os.listdir(searchDir)
