@@ -60,7 +60,11 @@ else:
     print("Looking for any file ending in '"+fileType+"' containing the text '"+searchText+"' in directory '"+whereToStart+"'\n")
 
 tmpList = 'tmp_list.txt'
-os.chdir(whereToStart)
+try:
+    os.chdir(whereToStart)
+except FileNotFoundError:
+    print("Directory not found! Check spelling.")
+    os.quit()
 searchDir = os.getcwd()
 searchFile = os.path.join(searchDir, tmpList)
 listedFiles = os.listdir(searchDir)
