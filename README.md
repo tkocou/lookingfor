@@ -30,3 +30,5 @@ Another use for 'lookingfor' would be a situation where you are reading a source
 
 Example:
 lookingfor '' readMessage( 
+
+Another use for this program would be checking the 'Battle for Wesnoth' data files for units having a particular attribute, like SKIRMISHER as an example.
